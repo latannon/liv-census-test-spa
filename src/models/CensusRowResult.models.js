@@ -1,0 +1,8 @@
+
+
+
+class CensusRowResult {
+    value;
+    count;
+
+}
