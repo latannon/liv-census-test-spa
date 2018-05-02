@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import "./Census.css";
 
 /**
- * 
- * 
+ *
+ *
  * @export
  * @class Census
  * @extends {Component}
@@ -16,7 +16,7 @@ export class Census extends Component {
 
   /**
    * Creates an instance of Census.
-   * @param {any} props 
+   * @param {any} props
    * @memberof Census
    */
   constructor(props) {
@@ -35,16 +35,16 @@ export class Census extends Component {
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @memberof Census
    */
   componentDidMount() {}
 
   /**
-   * 
-   * 
-   * @returns 
+   *
+   *
+   * @returns
    * @memberof Census
    */
   render() {
@@ -52,23 +52,33 @@ export class Census extends Component {
       <div className="Census">
         <div className="CensusFilters">
           <form>
-            <label>
-              Variable:{" "}
-              <select>
-                {this.filters.map(filter => (
-                  <option value="">{filter.label}</option>
-                ))}
-              </select>
-            </label>
-            <input type="button" value="Search" onClick={this.search} />
+            <div class="form-group">
+              <label>
+                Variable:{" "}
+                <select class="form-control">
+                  <option value="">- Choose a variable -</option>
+                  {this.filters.map(filter => (
+                    <option value="">{filter.label}</option>
+                  ))}
+                </select>
+              </label>
+              <input
+                class="btn btn-primary"
+                type="button"
+                value="Search"
+                onClick={this.search}
+              />
+            </div>
           </form>
         </div>
         <div className="CensusResults">
-          <table>
+          <table class="table table-striped table-dark">
             <thead>
-              <th>Value</th>
-              <th>Count</th>
-              <th>Average age</th>
+              <tr>
+                <th>Value</th>
+                <th>Count</th>
+                <th>Average age</th>
+              </tr>
             </thead>
             <tbody>
               {this.state.results.map(row => (
@@ -86,11 +96,12 @@ export class Census extends Component {
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @memberof Census
    */
-  search() {
+  search(e) {
+    e.preventDefault();
     console.log("Searching...");
     this.setState({
       results: [
