@@ -2,27 +2,36 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { Census } from "./components/census/Census.component";
+import Census from "./components/census/Census.component";
 
+/**
+ * Application main
+ * 
+ * @class App
+ * @extends {Component}
+ */
 class App extends Component {
   render() {
+    console.log('REACT_APP_API_ROOT : ', process.env.REACT_APP_API_ROOT_URL);
+    console.log('NODE_ENV : ', process.env.NODE_ENV);
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">US Census SPA</h1>
           <p>
-            Application should allow to select a column (amongst demographic
+            The application allows you to select a column (amongst demographic
             data), then display, for each different value in this column, number
             of lines with this value, and "age" value average.
           </p>
         </header>
-        <p className="App-intro">
+        <div className="App-intro">
           <Census />
-        </p>
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+
