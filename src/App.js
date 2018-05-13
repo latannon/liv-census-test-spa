@@ -5,7 +5,7 @@ import "./App.css";
 import Census from "./components/census/Census.component";
 
 /**
- * Application main
+ * Application main component
  * 
  * @class App
  * @extends {Component}
