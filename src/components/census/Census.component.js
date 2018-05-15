@@ -70,7 +70,9 @@ class Census extends Component {
                   onChange={this.handleLimitResultsSelection}
                 >
                   {Census.LIMIT_RESUTLS_DEFAULT_VALUES.map(value => (
-                    <option key={value} value={value}>{value}</option>
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
                   ))}
                 </select>
               </label>
@@ -92,7 +94,7 @@ class Census extends Component {
         {!is_loaded ? (
           <Spinner />
         ) : error ? (
-          <div className="alert alert-danger">Error: {error.message}</div>
+          <div className="alert alert-danger">{error.message}</div>
         ) : (
           <div className="CensusResults">
             {search_results.total_results_count > selected_limit_results ? (
@@ -140,7 +142,7 @@ class Census extends Component {
   }
 
   /**
-   * 
+   *
    *
    * @memberof Census
    */
@@ -150,7 +152,7 @@ class Census extends Component {
 
   /**
    * Handles the limit results selection changes event
-   * 
+   *
    * @param {any} e event
    * @memberof Census
    */
@@ -164,8 +166,8 @@ class Census extends Component {
 
   /**
    * Handles the variable selection changes event
-   * 
-   * @param {any} e 
+   *
+   * @param {any} e
    * @memberof Census
    */
   handleVariableSelection(e) {
@@ -210,9 +212,10 @@ class Census extends Component {
             // instead of a catch() block so that we don't swallow
             // exceptions from actual bugs in components.
             error => {
+              console.log(error);
               this.setState({
                 is_loaded: true,
-                error
+                error: this._buildMessageError(error)
               });
             }
           );
@@ -222,7 +225,7 @@ class Census extends Component {
 
   /**
    * Does API call to retrieve the variables list
-   * 
+   *
    * @memberof Census
    */
   loadVariablesList() {
@@ -242,7 +245,7 @@ class Census extends Component {
         error => {
           this.setState({
             is_loaded: true,
-            error
+            error: this._buildMessageError(error)
           });
         }
       );
@@ -250,13 +253,20 @@ class Census extends Component {
 
   /**
    * Check if the user fullfil requirement to do a search
-   * 
-   * @returns 
+   *
+   * @returns
    * @memberof Census
    */
   canDoSearch() {
     const { is_loaded, selected_variable } = this.state;
     return selected_variable && is_loaded;
+  }
+
+  _buildMessageError(error) {
+    return {
+      message: "An unexpected error occured !",
+      debug: error
+    };
   }
 }
 
